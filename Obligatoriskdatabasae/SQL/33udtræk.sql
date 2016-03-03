@@ -181,5 +181,13 @@ GROUP BY Hotel.Name;
 SELECT Count(Booking_id) AS Bookninger, Hotel.Name AS Hotel
 FROM Booking
 JOIN Hotel ON Booking.Hotel_No = Hotel.Hotel_No
-WHERE Date_From BETWEEN '2011-03-01' AND '2011-03-31'
+WHERE (Date_From BETWEEN '2011-03-01' AND '2011-03-31') AND (Date_To BETWEEN '2011-03-01' AND '2011-03-31')
+GROUP BY Hotel.Name;
+
+-- 28. Hvad er den mistede indtægt fra ledige værelser på hvert hotel i denne måned?
+SELECT Sum(Price)*31 AS Bookninger, Hotel.Name AS Hotel
+FROM Booking
+JOIN Hotel ON Booking.Hotel_No = Hotel.Hotel_No
+JOIN Room ON Booking.Room_No = Room.Room_No
+WHERE (Date_From BETWEEN '2011-03-01' AND '2011-03-31') AND (Date_To BETWEEN '2011-03-01' AND '2011-03-31')
 GROUP BY Hotel.Name;
