@@ -182,12 +182,27 @@ SELECT Count(Booking_id) AS Bookninger, Hotel.Name AS Hotel
 FROM Booking
 JOIN Hotel ON Booking.Hotel_No = Hotel.Hotel_No
 WHERE (Date_From BETWEEN '2011-03-01' AND '2011-03-31') AND (Date_To BETWEEN '2011-03-01' AND '2011-03-31')
-GROUP BY Hotel.Name;
+GROUP BY Hotel.Name,Hotel.Address;
 
 -- 28. Hvad er den mistede indtægt fra ledige værelser på hvert hotel i denne måned?
-SELECT Sum(Price)*31 AS Bookninger, Hotel.Name AS Hotel
+SELECT Sum(Price)*31 AS mistede_indtægt, Hotel.Name AS Hotel
 FROM Booking
 JOIN Hotel ON Booking.Hotel_No = Hotel.Hotel_No
 JOIN Room ON Booking.Room_No = Room.Room_No
 WHERE (Date_From BETWEEN '2011-03-01' AND '2011-03-31') AND (Date_To BETWEEN '2011-03-01' AND '2011-03-31')
-GROUP BY Hotel.Name;
+GROUP BY Hotel.Name,Hotel.Address;
+
+-- 29. Indsæt nye gæster
+INSERT INTO Guest (Guest_No,Name,Address) VALUES (75,'Niels','Roskilde');
+
+-- 30. Indsæt et nyt hotel
+INSERT INTO Hotel (Hotel_No,Name,Address) VALUES (8,'Tivoli','København');
+
+-- 31. Indsæt værelser i det nye hotel.
+INSERT INTO Room (Room_No,Hotel_No,Types,Price) VALUES (23,8,'S',650);
+
+-- 32. Indsæt bookinger.
+INSERT INTO Booking (Hotel_No,Guest_No,Date_From,Date_To,Room_No) VALUES (8,75,'2012-03-09','2012-03-11',23);
+
+-- 33. Forøg prisen på alle værelser med 5%.
+UPDATE Room SET Price = Price*5;
