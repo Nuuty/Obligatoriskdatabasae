@@ -205,4 +205,4 @@ INSERT INTO Room (Room_No,Hotel_No,Types,Price) VALUES (23,8,'S',650);
 INSERT INTO Booking (Hotel_No,Guest_No,Date_From,Date_To,Room_No) VALUES (8,75,'2012-03-09','2012-03-11',23);
 
 -- 33. Forøg prisen på alle værelser med 5%.
-UPDATE Room SET Price = Price*5;
+UPDATE Room SET Price = Price*1.05;
